@@ -18,7 +18,9 @@ example_histogram.observe(100)
 example_counter = Counter('alicek106_counter', 'Counter example')
 
 rate_example_gauge = Gauge('alicek106_gauge', 'Gauge example for rate()')
-rate_example_gauge.set(15)
+rate_example_gauge.set(5)
+initial_value = 5
+offset_value = 5
 
 ## group_left example. It should be 'counter' type if you want to use.
 
@@ -51,6 +53,11 @@ def update_histogram():
 @app.route("/metrics")
 def requests_count():
     result = []
+
+    global initial_value
+    initial_value = initial_value + offset_value
+    rate_example_gauge.set(initial_value)
+
     result.append(prometheus_client.generate_latest(rate_example_gauge))
     result.append(prometheus_client.generate_latest(example_counter))
     result.append(prometheus_client.generate_latest(example_histogram))
