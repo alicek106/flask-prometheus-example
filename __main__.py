@@ -27,15 +27,15 @@ offset_value = 5
 methods = ["get", "get", "put", "post", "post"]
 queries = [500, 404, 501, 500, 404]
 values = [24, 30, 3, 6, 21]
-error_gauge = Gauge('alicek106_http_errors', 'Test', ['method', 'code'])
+error_gauge = Gauge('alicek106_http_errors', 'Test', ['method', 'code', 'error_message'])
 for i in range(0, len(methods)):
-    error_gauge.labels(methods[i], queries[i]).set(values[i])
+    error_gauge.labels(methods[i], queries[i], 'error').set(values[i])
 
 method_success = ["get", "del", "post"]
 values_success = [600, 34, 120]
-success_gauge = Gauge('alicek106_http_requests', 'Test', ['method'])
+success_gauge = Gauge('alicek106_http_requests', 'Test', ['method', 'success_message'])
 for i in range(0, len(method_success)):
-    success_gauge.labels(methods[i]).set(values_success[i])
+    success_gauge.labels(methods[i], 'success').set(values_success[i])
 
 ##
 
