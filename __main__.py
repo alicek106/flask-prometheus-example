@@ -33,9 +33,9 @@ for i in range(0, len(methods)):
 
 method_success = ["get", "del", "post"]
 values_success = [600, 34, 120]
-success_gauge = Gauge('alicek106_http_requests', 'Test', ['method', 'success_message'])
+success_gauge = Gauge('alicek106_http_requests', 'Test', ['method'])
 for i in range(0, len(method_success)):
-    success_gauge.labels(methods[i], 'success').set(values_success[i])
+    success_gauge.labels(methods[i]).set(values_success[i])
 
 ##
 
